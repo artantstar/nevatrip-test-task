@@ -10,29 +10,33 @@ body {
 
 .container {
   max-width: 1100px;
+
   display: flex;
   flex-wrap: wrap;
   grid-gap: 30px;
-  background-color: #ccc;
+
   margin: 0 auto;
 }
 
 .card {
   width: 100%;
-  height: 600px;
-  background-color: lightblue;
 }
 
-.card2 {
-  background-color: lightgoldenrodyellow;
+.card__box {
+  overflow: hidden;
+  border: 0.3px solid #828282;
+  border-radius: 16px;
 }
 
-.card3 {
-  background-color: lightpink;
+.card__image {
+  width: 100%;
+  background-color: mediumspringgreen;
+  aspect-ratio: 5 / 3.5;
 }
 
-.card4 {
-  background-color: lightseagreen;
+.card__text {
+  width: 100%;
+  background-color: mediumslateblue;
 }
 
 @media (min-width: 690px) {
@@ -42,7 +46,23 @@ body {
 }
 
 @media (min-width: 990px) {
+  .container {
+    grid-gap: 60px;
+  }
   .card {
     width: 100%;
+  }
+
+  .card__box {
+    display: flex;
+    height: 100%;
+  }
+
+  .card__image {
+    width: 43%;
+  }
+  .card__text {
+    width: 57%;
+    height: 100%;
   }
 }
