@@ -8,14 +8,15 @@ body {
   padding: 0 5%;
 }
 
+
+
 .container {
   max-width: 1100px;
+  margin: 30px auto;
 
   display: flex;
   flex-wrap: wrap;
   grid-gap: 30px;
-
-  margin: 0 auto;
 }
 
 .card {
@@ -24,19 +25,38 @@ body {
 
 .card__box {
   overflow: hidden;
+
   border: 0.3px solid #828282;
   border-radius: 16px;
 }
 
 .card__image {
   width: 100%;
-  background-color: mediumspringgreen;
   aspect-ratio: 5 / 3.5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.card__image img, a {
+  height: 100%;
+  display: block;
+}
+
+.card__image img {
+  transition: all .2s;
+}
+
+.card__image img:hover {
+  transform: scale(1.02);
 }
 
 .card__text {
   width: 100%;
-  background-color: mediumslateblue;
+  background-color: #fff;
 }
 
 @media (min-width: 690px) {
@@ -48,6 +68,7 @@ body {
 @media (min-width: 990px) {
   .container {
     grid-gap: 60px;
+    margin: 60px auto;
   }
   .card {
     width: 100%;
