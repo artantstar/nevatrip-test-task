@@ -108,8 +108,6 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  /* column-gap: 7px; */
-  /* row-gap: 3px; */
 }
 
 .card__time-depart-text {
@@ -130,6 +128,14 @@ body {
   align-items: center;
   justify-content: center;
   margin: 3px 7px 0 0;
+}
+
+.card__time-depart-btn {
+  border: none;
+}
+
+.card__time-depart {
+  transition: height 0.25s ease-in;
 }
 
 .hidden {
