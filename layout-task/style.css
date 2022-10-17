@@ -6,7 +6,6 @@
   box-sizing: border-box;
 }
 
-
 body {
   padding: 0 5%;
   min-width: 260px;
@@ -57,7 +56,7 @@ body {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 }
 
@@ -109,16 +108,18 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  column-gap: 7px;
-  row-gap: 3px;
+  /* column-gap: 7px; */
+  /* row-gap: 3px; */
 }
 
 .card__time-depart-text {
+  display: block;
   width: 100%;
-  margin-bottom: 7px;
+  margin: 0 15px 4px 0;
 }
 
-.card__time-depart {
+.card__time-depart,
+.card__time-depart-btn {
   display: block;
   width: 64px;
   height: 24px;
@@ -128,6 +129,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 3px 7px 0 0;
+}
+
+.hidden {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  margin: 0;
 }
 
 .card__prop-box li {
@@ -204,7 +213,6 @@ body {
 }
 
 .banner_blue {
-  
   width: 130px;
   color: #fff;
   background: #099ce8;
@@ -268,8 +276,8 @@ body {
   }
 
   .card__time-depart-text {
+    display: inline;
     width: auto;
-    margin-bottom: auto;
   }
 
   .card__price-box {
