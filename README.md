@@ -15,3 +15,7 @@
 - Под ценой может не быть надписи "1200₽ на причале" 
   в таком случае цена должна быть выровнена посередине 
   относительно копки "подробнее"
+
+### ✅ Решение: ###
+- [Демо](https://artantstar.github.io/nevatrip-test-task/layout-task/)
+- [Исходный код](https://github.com/artantstar/nevatrip-test-task/tree/layout-task)
