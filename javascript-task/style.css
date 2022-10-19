@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blak: #000;
+  --white: #fff;
+  --black-text: #222;
+  --gray-text: #747474;
+  --container: #f3f3f3;
+  --result: #e3e3e3;
+  --background: #ededed;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--background);
+  color: var(--black-text);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  min-height: 550px;
+  min-width: 600px;
+  background-color: var(--container);
+  box-shadow: 0px 0px 41px -7px rgba(0, 0, 0, 0.15);
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container * {
+  margin-bottom: 20px;
+}
+
+.container label {
+  margin-bottom: 5px;
+}
+
+.routeAB,
+.routeBA {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+  position: absolute;
+}
+
+.result {
+  width: 100%;
+  height: 150px;
+  margin-top: auto;
+  background-color: var(--result);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.result span {
+  min-width: 0;
+  min-height: 0;
+  font-size: 14px;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+
