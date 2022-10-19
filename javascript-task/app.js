@@ -1,11 +1,11 @@
 const route = document.querySelector('#route');
 const timeA = document.querySelector('#timeA');
-let timeB = document.querySelector('#timeB');
-const timeB2 = timeB
+const timeB = document.querySelector('#timeB');
 const routeAB = document.querySelector('.routeAB');
 const routeBA = document.querySelector('.routeBA');
 const btn = document.querySelector('button');
 const ticket = document.querySelector('#num');
+const divResult = document.querySelectorAll('.result span');
 let price;
 let currentRoute;
 let timeRoute;
@@ -13,17 +13,18 @@ let timeDepart;
 let timeArrival;
 let resultTime;
 let resultTiming;
+let resultPrice;
 
 
 function easyRoute(event) {
+  clearSpan();
   timeDepart = event.target.value
   timeArrival = moment(timeDepart, 'HH:mm').add(50, 'm').format('HH:mm');
-
-  resultTime = `Это путешествие займет у вас ${timeRoute}.`
-  resultTiming = `Теплоход отправляется в ${timeDepart}, а прибудет в ${timeArrival}.`
+  timeRoute = '50 минут';
 }
 
 function hardRouteA(event) {
+  clearSpan();
   timeDepart = event.target.value
   routeBA.classList.remove("hidden");
   delTime();
@@ -33,17 +34,42 @@ function hardRouteA(event) {
 
 function hardRouteB(event) {
   timeArrival = moment(event.target.value, 'HH:mm').add(50, 'm').format('HH:mm');
-
-  console.log(timeDepart)
-  console.log(timeArrival)
-
   let a = moment(timeDepart, 'HH:mm')
   let b = moment(timeArrival, 'HH:mm')
   let c = a.diff(b)
   timeRoute = humanizeDuration(c, { language: "ru" })
+}
 
-  resultTime = `Это путешествие займет у вас ${timeRoute}.`
-  resultTiming = `Теплоход отправляется в ${timeDepart}, а прибудет в ${timeArrival}.`
+function result() {
+  clearSpan();
+  if (!ticket.value || ticket.value <= 0 || !currentRoute || !timeRoute) {
+    if (!currentRoute) {
+      divResult[3].innerHTML = 'Не выбран маршрут'
+      divResult[3].hidden = false;
+
+    } else if (!timeRoute) {
+      divResult[4].innerHTML = 'Не выбрано время'
+      divResult[4].hidden = false;
+    }
+    if (!ticket.value || ticket.value <= 0) {
+      divResult[5].innerHTML = 'Неправильное количество билетов.'
+      divResult[5].hidden = false;
+    }
+    return
+  } else {
+    if (ticket.value == 1) resultPrice = `Вы выбрали ${ticket.value} билет по маршруту ${currentRoute} стоимостью ${ticket.value * price}р.`
+    if (ticket.value >= 2 && ticket.value <= 4) resultPrice = `Вы выбрали ${ticket.value} билета по ${currentRoute} маршруту стоимостью ${ticket.value * price}р.`
+    if (ticket.value >= 5) resultPrice = `Вы выбрали ${ticket.value} билетов по ${currentRoute} маршруту стоимостью ${ticket.value * price}р.`
+
+    resultTime = `Это путешествие займет у вас ${timeRoute}.`
+    resultTiming = `Теплоход отправляется в ${timeDepart}, а прибудет в ${timeArrival}.`
+  }
+  divResult[0].innerHTML = resultPrice
+  divResult[1].innerHTML = resultTime
+  divResult[2].innerHTML = resultTiming
+  divResult[0].hidden = false;
+  divResult[1].hidden = false;
+  divResult[2].hidden = false;
 }
 
 function delTime() {
@@ -76,7 +102,6 @@ route.addEventListener('change', (event) => {
     routeAB.classList.remove("hidden");
     price = 700;
     currentRoute = event.target.value;
-    timeRoute = '50 минут';
 
     timeA.addEventListener('change', easyRoute);
   }
@@ -84,7 +109,6 @@ route.addEventListener('change', (event) => {
     routeBA.classList.remove("hidden");
     price = 700;
     currentRoute = event.target.value;
-    timeRoute = '50 минут';
 
     timeB.addEventListener('change', easyRoute);
   }
@@ -95,19 +119,20 @@ route.addEventListener('change', (event) => {
 
     timeA.addEventListener('change', hardRouteA);
   }
-
 });
 
 function clear() {
-  routeAB.classList.add("hidden");
-  routeBA.classList.add("hidden");
-
   timeA.removeEventListener('change', easyRoute);
   timeB.removeEventListener('change', easyRoute);
   timeA.removeEventListener('change', hardRouteA);
-  timeA.removeEventListener('change', hardRouteB);
+  timeB.removeEventListener('change', hardRouteB);
+  btn.removeEventListener('change', result);
+
+  routeAB.classList.add("hidden");
+  routeBA.classList.add("hidden");
 
   clearTime();
+  clearSpan();
 
   timeA.selectedIndex = 0;
   timeB.selectedIndex = 0;
@@ -120,12 +145,14 @@ function clear() {
   timeArrival = undefined;
   resultTime = undefined;
   resultTiming = undefined;
+  resultPrice = undefined;
 }
 
-btn.addEventListener('click', (event) => {
-  if (ticket.value && price && timeRoute) {
-    if (ticket.value == 1) console.log(`Вы выбрали ${ticket.value} билет по маршруту ${currentRoute} стоимостью ${ticket.value * price}р.\nЭто путешествие займет у вас ${timeRoute}. `)
-    if (ticket.value >= 2 && ticket.value <= 4) console.log(`Вы выбрали ${ticket.value} билета по ${currentRoute} маршруту стоимостью ${ticket.value * price}р.\nЭто путешествие займет у вас ${timeRoute}. `)
-    if (ticket.value >= 5) console.log(`Вы выбрали ${ticket.value} билетов по ${currentRoute} маршруту стоимостью ${ticket.value * price}р.\nЭто путешествие займет у вас ${timeRoute}. `)
-  } else console.log(`Выберите маршрут и количество билетов`)
-});
+function clearSpan() {
+  for (i = 0; i < 6; i++) {
+    divResult[i].innerHTML = ''
+    divResult[i].hidden = true;
+  }
+}
+
+btn.addEventListener('click', result);

@@ -38,8 +38,8 @@
       <label for="timeB">Выберите время из B в A</label>
       <select name="timeB" id="timeB">
         <option hidden disabled selected value>время</option>
-        <option hidden disabled value="18:30">18:30</option>
-        <option hidden disabled value="18:45">18:45</option>
+        <option value="18:30">18:30</option>
+        <option value="18:45">18:45</option>
         <option value="19:00">19:00</option>
         <option value="19:15">19:15</option>
         <option value="19:35">19:35</option>
@@ -49,8 +49,18 @@
     </div>
 
     <label for="num">Количество билетов</label>
-    <input id="num" type="number">
-    <button>Посчитать</button>
+    <div class="">
+      <input id="num" type="number">
+      <button>Посчитать</button>
+    </div>
+    <div class="result">
+      <span hidden></span>
+      <span hidden></span>
+      <span hidden></span>
+      <span hidden></span>
+      <span hidden></span>
+      <span hidden></span>
+    </div>
 
   </div>
 
