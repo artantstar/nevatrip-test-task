@@ -14,6 +14,17 @@ let timeArrival;
 let resultTime;
 let resultTiming;
 let resultPrice;
+let gmt = moment().format('Z');
+
+function timeZone(event) {
+  for (i = 1; i < event.length; i++) {
+    let a = moment(event[i].value, 'HH:mm').add(gmt).format('HH:mm')
+    event[i].value = a
+    event[i].innerHTML = a
+  }
+}
+timeZone(timeA);
+timeZone(timeB);
 
 
 function easyRoute(event) {
