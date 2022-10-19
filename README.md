@@ -102,3 +102,8 @@
 	Вы выбрали 4 билета по маршруту из A в B стоимостью 4000р.
 	Это путешествие займет у вас 40 минут. 
 	Теплоход отправляется в 12-00, а прибудет в 18-00.
+
+  **✅ Решение:**
+
+- [Демо](https://artantstar.github.io/nevatrip-test-task/javascript-task/)
+- [Исходный код](https://github.com/artantstar/nevatrip-test-task/tree/javascript-task)
