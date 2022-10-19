@@ -12,9 +12,50 @@
 <body>
 
   <div class="container">
-    
+
+    <label for="route">Выберите маршрут</label>
+    <select name="route" id="route">
+      <option hidden disabled selected value>направление</option>
+      <option value="из A в B">из A в B</option>
+      <option value="из B в A">из B в A</option>
+      <option value="из A в B и обратно в А">из A в B и обратно в А</option>
+    </select>
+
+    <div class="routeAB hidden">
+      <label for="timeA">Выберите время из A в B</label>
+      <select name="timeA" id="timeA">
+        <option hidden disabled selected value>время</option>
+        <option value="18:00">18:00</option>
+        <option value="18:30">18:30</option>
+        <option value="18:45">18:45</option>
+        <option value="19:00">19:00</option>
+        <option value="19:15">19:15</option>
+        <option value="21:00">21:00</option>
+      </select>
+    </div>
+
+    <div class="routeBA hidden">
+      <label for="timeB">Выберите время из B в A</label>
+      <select name="timeB" id="timeB">
+        <option hidden disabled selected value>время</option>
+        <option value="18:30">18:30</option>
+        <option value="18:45">18:45</option>
+        <option value="19:00">19:00</option>
+        <option value="19:15">19:15</option>
+        <option value="19:35">19:35</option>
+        <option value="21:50">21:50</option>
+        <option value="21:55">21:55</option>
+      </select>
+    </div>
+
+    <label for="num">Количество билетов</label>
+    <input id="num" type="number">
+    <button>Посчитать</button>
+
   </div>
 
+  <script src="moment.js"></script>
+  <script src="humanize-duration.js"></script>
   <script src="app.js"></script>
 </body>
 

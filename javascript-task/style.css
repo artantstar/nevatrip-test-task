@@ -30,5 +30,27 @@ body {
   min-width: 400px;
   background-color: var(--container);
   box-shadow: 0px 0px 41px -7px rgba(0, 0, 0, 0.15);
-  padding: 10px;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container * {
+  margin-bottom: 20px;
+}
+
+.container label {
+  margin-bottom: 5px;
+}
+
+.routeAB,
+.routeBA {
+  display: flex;
+  flex-direction: column;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+  position: absolute;
 }
