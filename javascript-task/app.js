@@ -1,20 +1,7 @@
-
-// let hours = new Date();
-// var localHours = (hours.getTimezoneOffset() / 60) * -1
-// let time = 20
-
-// if ((time + localHours) < 0) localHours = localHours + 24
-// if ((time + localHours) > 23) localHours = localHours - 24
-
-// if (time + localHours >= 10)
-//   console.log((time + localHours) + ':00')
-// else
-//   console.log('0' + (time + localHours) + ':00')
-
-
 const route = document.querySelector('#route');
 const timeA = document.querySelector('#timeA');
-const timeB = document.querySelector('#timeB');
+let timeB = document.querySelector('#timeB');
+const timeB2 = timeB
 const routeAB = document.querySelector('.routeAB');
 const routeBA = document.querySelector('.routeBA');
 const btn = document.querySelector('button');
@@ -26,27 +13,65 @@ let timeDepart;
 let timeArrival;
 let resultTime;
 let resultTiming;
- 
+
 
 function easyRoute(event) {
-  // routeBA.classList.add("hidden");
   timeDepart = event.target.value
   timeArrival = moment(timeDepart, 'HH:mm').add(50, 'm').format('HH:mm');
+
   resultTime = `Это путешествие займет у вас ${timeRoute}.`
   resultTiming = `Теплоход отправляется в ${timeDepart}, а прибудет в ${timeArrival}.`
 }
 
-function hardRoute(event) {
+function hardRouteA(event) {
   timeDepart = event.target.value
   routeBA.classList.remove("hidden");
+  delTime();
+  timeB.addEventListener('change', hardRouteB);
+
 }
 
+function hardRouteB(event) {
+  timeArrival = moment(event.target.value, 'HH:mm').add(50, 'm').format('HH:mm');
 
+  console.log(timeDepart)
+  console.log(timeArrival)
+
+  let a = moment(timeDepart, 'HH:mm')
+  let b = moment(timeArrival, 'HH:mm')
+  let c = a.diff(b)
+  timeRoute = humanizeDuration(c, { language: "ru" })
+
+  resultTime = `Это путешествие займет у вас ${timeRoute}.`
+  resultTiming = `Теплоход отправляется в ${timeDepart}, а прибудет в ${timeArrival}.`
+}
+
+function delTime() {
+  for (i = 1; i < timeB.length; i++) {
+    let a = moment(timeDepart, 'HH:mm').add(50, 'm')
+    let b = moment(timeB[i].value, 'HH:mm')
+
+    if (b >= a) {
+      timeB[i].disabled = false;
+      timeB[i].hidden = false;
+    } else if (b < a) {
+      timeB[i].disabled = true;
+      timeB[i].hidden = true;
+    }
+  }
+}
+
+function clearTime() {
+  for (i = 1; i < timeB.length; i++) {
+    timeB[i].disabled = false;
+    timeB[i].hidden = false;
+  }
+}
 
 route.addEventListener('change', (event) => {
 
   clear();
-  // console.log(event.target.value)
+
   if (event.target.value == 'из A в B') {
     routeAB.classList.remove("hidden");
     price = 700;
@@ -68,12 +93,7 @@ route.addEventListener('change', (event) => {
     price = 1200;
     currentRoute = event.target.value;
 
-    timeA.addEventListener('change', hardRoute);
-
-    // timeA.addEventListener('change', (event) => {
-    //   routeBA.classList.remove("hidden");
-    // });
-
+    timeA.addEventListener('change', hardRouteA);
   }
 
 });
@@ -84,8 +104,10 @@ function clear() {
 
   timeA.removeEventListener('change', easyRoute);
   timeB.removeEventListener('change', easyRoute);
-  timeA.removeEventListener('change', hardRoute);
-  // timeB.removeEventListener('change');
+  timeA.removeEventListener('change', hardRouteA);
+  timeA.removeEventListener('change', hardRouteB);
+
+  clearTime();
 
   timeA.selectedIndex = 0;
   timeB.selectedIndex = 0;
